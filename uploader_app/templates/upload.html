@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Uploader App</title>
+</head>
+<body>
+
+<h2>Upload Image</h2>
+
+<form action="/upload" method="POST" enctype="multipart/form-data">
+
+    <label>Title:</label><br>
+    <input name="title"><br><br>
+
+    <label>Description:</label><br>
+    <textarea name="description"></textarea><br><br>
+
+    <label>Select Image:</label><br>
+    <input type="file" name="image" accept="image/*"><br><br>
+
+    <button type="submit">Upload</button>
+</form>
+
+</body>
+</html>
