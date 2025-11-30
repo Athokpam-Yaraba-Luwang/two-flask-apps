@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Upload Image | Two-Flask System</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/styles.css') }}">
+</head>
+
+<body>
+    <div class="container">
+        <header class="app-header">
+            <h1>Upload Image</h1>
+            <p class="subtitle">Share your moments with the world</p>
+        </header>
+
+        <main class="upload-card">
+            {% with messages = get_flashed_messages() %}
+            {% if messages %}
+            <div class="flash-messages">
+                {% for message in messages %}
+                <div class="flash-message">{{ message }}</div>
+                {% endfor %}
+            </div>
+            {% endif %}
+            {% endwith %}
+
+            <form action="/upload" method="POST" enctype="multipart/form-data" id="uploadForm">
+                <div class="form-group">
+                    <label for="title">Title</label>
+                    <input type="text" id="title" name="title" placeholder="Enter a catchy title" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+                    <textarea id="description" name="description" placeholder="Describe your image..." rows="3"
+                        required></textarea>
+                </div>
+
+                <div class="upload-mode-toggle">
+                    <button type="button" class="mode-btn active" id="fileModeBtn">File Upload</button>
+                    <button type="button" class="mode-btn" id="cameraModeBtn">Camera</button>
+                </div>
+
+                <!-- File Upload Section -->
+                <div id="fileSection" class="upload-section active">
+                    <div class="file-drop-area">
+                        <span class="file-msg">Drag and drop or click to select</span>
+                        <input type="file" name="image" id="fileInput" accept="image/*">
+                    </div>
+                </div>
+
+                <!-- Camera Section -->
+                <div id="cameraSection" class="upload-section" style="display: none;">
+                    <div class="camera-container">
+                        <video id="video" autoplay playsinline></video>
+                        <canvas id="canvas" style="display: none;"></canvas>
+                        <div class="camera-controls">
+                            <button type="button" id="snapBtn" class="btn secondary">Take Photo</button>
+                            <button type="button" id="retakeBtn" class="btn secondary"
+                                style="display: none;">Retake</button>
+                        </div>
+                        <input type="hidden" name="camera_image" id="cameraInput">
+                    </div>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" class="btn primary">Upload to Gallery</button>
+                </div>
+            </form>
+        </main>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/capture.js') }}"></script>
+</body>
+
+</html>

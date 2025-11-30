@@ -1,0 +1,5 @@
+Flask>=3.0.0
+google-cloud-storage
+google-cloud-firestore
+Werkzeug>=3.0.0
+gunicorn
